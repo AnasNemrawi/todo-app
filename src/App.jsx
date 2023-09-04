@@ -1,19 +1,23 @@
 import React from 'react';
-
+import SettingFunction from './Context/Settings/index';
 import Todo from './Components/Todo';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
+import { MantineProvider } from '@mantine/core';
+import Header from './Components/Header/index';
+import Footer from './Components/Footer/index';
+// import app from './app.scss';
 
+export default function App() {
+	return (
+		<MantineProvider withGlobalStyles withNormalizeCSS>
 
-export default class App extends React.Component {
-	render() {
-		return (
-			<>
-				{/* <Header/> */}
+			<SettingFunction>
+
+				<Header />
 				<Todo />
-
 				<Footer />
-			</>
-		);
-	}
+
+			</SettingFunction>
+		</MantineProvider>
+
+	);
 }
