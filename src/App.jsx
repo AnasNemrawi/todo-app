@@ -1,22 +1,33 @@
 import React from 'react';
-import SettingFunction from './Context/Settings/index';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SettingPage from './Components/SettingsPage/SettingPage';
 import Todo from './Components/Todo';
-import { MantineProvider } from '@mantine/core';
-import Header from './Components/Header/Header';
-import Footer from './Components/Footer/index';
+import AppHeader from './Components/Header/Header';
+import Footer from './Components/Footer/Footer';
+import './App.scss'
+import Settings from './Components/Context/Settings/Settings';
+import ListsSaver from './Components/Context/ListOfData/ListOfData';
+import LoginProvider from './Components/Context/LoginContext/LoginContext';
+// import { When } from 'react-if';
 
 export default function App() {
+  // const {loginData} = useContext(LoginContext)
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS>
+    <BrowserRouter>
+      <LoginProvider>
+        <Settings>
+          <ListsSaver>
+            
+            <AppHeader />
 
-    <SettingFunction>
-      <div className='app-div'>
-      <Header />
-      <Todo />
-      <Footer />
-         </div> 
-    </SettingFunction>
-    </MantineProvider>
-
+            <Routes>
+              <Route path='/' element={<Todo />} />
+              <Route path='/settings' element={<SettingPage />} />
+            </Routes>
+            <Footer />
+          </ListsSaver>
+        </Settings>
+      </LoginProvider>
+    </BrowserRouter>
   );
 }
